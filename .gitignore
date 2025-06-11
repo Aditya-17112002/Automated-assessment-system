@@ -1,0 +1,38 @@
+# Python cache
+*.py[cod]
+__pycache__/
+**/__pycache__/
+
+# Virtual environments
+env/
+venv/
+
+# Django static and media files
+staticfiles/
+media/
+
+# Database
+*.sqlite3
+
+# Editor-specific files
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Environment files
+.env
+*.env
+
+# Logs and backups
+*.log
+*.bak
+
+# Git internal data (only relevant if you ever zip this repo)
+.git/
+
+# Migrations cache
+**/migrations/*.pyc
+**/migrations/__pycache__/
+
+# Google Cloud service account key (do NOT upload!)
+*.json

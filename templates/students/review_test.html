@@ -1,0 +1,90 @@
+{% extends 'common.html' %}
+{% load static %}
+
+{% block main %}
+<style>
+    .card {
+        border-radius: 15px;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        background: #f8f9fa;
+    }
+    .jumbotron {
+        background: linear-gradient(135deg, #6a11cb, #2575fc);
+        color: white;
+        border-radius: 10px;
+        padding: 30px;
+    }
+    .form-control {
+        border-radius: 10px;
+    }
+    .ai-feedback-box {
+        background: #eef2ff;
+        padding: 15px;
+        border-radius: 10px;
+    }
+    .score-box {
+        background: #fff;
+        padding: 10px;
+        border-radius: 10px;
+        border: 1px solid #ccc;
+    }
+</style>
+<br><br>
+<div class="d-flex justify-content-center">
+    <div class="card" style="width: 75%;">
+        <div class="card-header">
+            <div class="jumbotron">
+                <div class="container">
+                    <h1 class="display-4">{{ test }}</h1>
+                    <div class="row">
+                        <p class="lead col-sm">{{ test.desc }}</p>      
+                        <p class="lead col-sm text-right">Review Test</p>
+                    </div>
+                    <p class="col-sm text-right"><b>Final Score:</b> {{ mark }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            {% for q in ans %}
+            <br>
+            <div class="p-3 mb-4" style="background: white; border-radius: 10px; box-shadow: 0px 2px 8px rgba(0,0,0,0.1);">
+                <h5 class="card-title">{{ q.qns.qn_text }}</h5>
+                
+                <label><b>Student's Answer:</b></label>
+                <textarea class="form-control" rows="3" readonly>{{ q.ans.answer_text }}</textarea>
+                
+                <!-- AI-Based Feedback -->
+                <div class="ai-feedback-box mt-3">
+                    <label><b>AI Feedback:</b></label>
+					<textarea class="form-control auto-expand" readonly>{{ q.ai_feedback }}</textarea>
+                </div>
+                
+                <!-- NLP & AI-Based Scores -->
+                <div class="row mt-3">
+                    <div class="col-md-6">
+                        <div class="score-box text-center">
+                            <label><b>AI-Based Score:</b></label>
+                            <input type="text" class="form-control text-center" value="{{ q.ans.actual_score }} / {{ q.qns.max_score }}" readonly>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="score-box text-center">
+                            <label><b>NLP-Based Similarity Score:</b></label>
+                            <input type="text" class="form-control text-center" value="{{ q.nlp_score }} / {{ q.qns.max_score }}" readonly>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+<br><br>
+<script>
+	document.addEventListener("DOMContentLoaded", function() {
+	  document.querySelectorAll(".auto-expand").forEach(textarea => {
+		textarea.style.height = textarea.scrollHeight + "px";
+	  });
+	});
+  </script>
+{% endblock %}
