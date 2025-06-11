@@ -53,7 +53,8 @@ from sklearn.feature_extraction.text import TfidfVectorizer, TfidfTransformer
 load_dotenv()
 
 # Set Google Cloud Credentials from .env
-os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = os.getenv('GOOGLE_APPLICATION_CREDENTIALS')
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "/etc/secrets/google-credentials.json"
+
 
 
 @login_required(login_url='login')
@@ -85,6 +86,7 @@ load_dotenv()
 
 # Configure Google Gemini API using key from .env
 genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
+
 model = genai.GenerativeModel("gemini-1.5-flash")
 
 # Ensure NLTK data path is available
